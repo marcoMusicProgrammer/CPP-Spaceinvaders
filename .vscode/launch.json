@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug con clang++ e Raylib",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "Compila con clang++ e Raylib"
+        }
+    ]
+}

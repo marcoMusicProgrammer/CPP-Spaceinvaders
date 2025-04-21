@@ -9,10 +9,11 @@ class Laser
     void Update();
     void Draw();
 
+    bool active;
+
     private:
         Vector2 position;
         int speed;
-        bool active;
 
 
 };

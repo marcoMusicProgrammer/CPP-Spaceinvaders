@@ -2,6 +2,7 @@
 #include "spaceship.hpp"
 #include "game.hpp"
 #include "laser.hpp"
+#include "obstacle.hpp"
 
 int main() {
 
@@ -13,19 +14,16 @@ int main() {
     SetTargetFPS(60);
 
     Game Game;
-    Laser laser = Laser({100,0},10);
 
     while (WindowShouldClose() == false) {
 
         Game.HandleInput();
-        laser.Update();
         Game.Update();
 
         BeginDrawing();
         ClearBackground(grey);
 
         Game.Draw();
-        laser.Draw();
 
         EndDrawing();
     }

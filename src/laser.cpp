@@ -24,9 +24,9 @@ void Laser::Draw()
 void Laser::Update()
 {
     position.y += speed;
+    // std::cout << "Posizione laser: " << position.x << ", " << position.y <<  std::endl;
     if (position.y > GetScreenHeight() || position.y < 0)
     {
         active = false;
-        std::cout << "Laser is not active" << std::endl;
     }
 }

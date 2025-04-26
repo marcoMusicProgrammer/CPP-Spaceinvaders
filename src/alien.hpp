@@ -9,8 +9,9 @@
         void Update(int direction);
         void Draw();
         int GetType();
-        void FireLasers();
         static void UnloadImages();
+        Rectangle GetRect();
+
 
         static Texture2D images [3];
         int type;

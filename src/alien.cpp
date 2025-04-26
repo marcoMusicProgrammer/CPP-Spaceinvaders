@@ -40,7 +40,8 @@ int Alien::GetType()
 void Alien::UnloadImages()
 {
     std::cout << "Elimino le texture" << std::endl;
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 4; i++)
+    {
         UnloadTexture(images[i]);
     }
 }
@@ -48,19 +49,9 @@ void Alien::UnloadImages()
 void Alien::Update(int direction)
 {
     position.x += direction;
-
 }
 
-// void Alien::FireLasers()
-// {
-//     int random_num = GetRandomValue(0,1000);
-//     std::cout << "Random number; "<< random_num << std::endl;
-
-//     if(random_num == 1) {
-//         if(GetTime() - lastFireTime > 1)
-//         {
-//             lasers.push_back(Laser({position.x + (images[type -1].width / 2), position.y + images[type -1].height},4));
-//             lastFireTime = GetTime();
-//         }
-//     }
-// }
+Rectangle Alien::GetRect()
+{
+    return {position.x,position.y,float(images[type -1].width),float(images[type -1].height)};
+}

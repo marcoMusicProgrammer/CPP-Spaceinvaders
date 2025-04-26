@@ -6,14 +6,18 @@ Game::Game()
 {
     obstacles = CreateObstacles();
     aliens = CreateAliens();
+    mysteryship.Spawn();
     aliensDirection = 1;
     timeLastAlienFire = 0.0;
+    lastTimeMysteryship = 0.0;
 }
 
 Game::~Game()
 {
-     Alien::UnloadImages();
+    Alien::UnloadImages();
+    mysteryship.UnloadImage();
 }
+
 
 void Game::Update()
 {
@@ -30,10 +34,12 @@ void Game::Update()
 
     DeleteInactiveLaser();
     MoveAliens();
-    
-    std::cout << "Number of alien laser hit: " << alienLasers.size() << std::endl;
 
-    //std::cout << "Number of laser hit: " << spaceship.lasers.size() << std::endl;
+    mysteryship.Update();
+    
+    //std::cout << "Number of alien laser hit: " << alienLasers.size() << std::endl;
+    RespawnMysteryship();
+    
 }
 
 void Game::Draw()
@@ -56,6 +62,8 @@ void Game::Draw()
     for (auto& laser : alienLasers) {
         laser.Draw();
     }
+
+    mysteryship.Draw();
 }
 
 void Game::HandleInput()
@@ -132,21 +140,20 @@ std::vector<Alien> Game::CreateAliens()
     return aliens;
 }
 
-void Game::MoveAliens() {
-    
+void Game::MoveAliens()
+{
     for(auto& alien : aliens) {
         if(alien.position.x + alien.images[alien.type -1].width > GetScreenWidth()) {
             aliensDirection = -1;
             MoveDownAliens(4);
         }
+
         if(alien.position.x < 0) {
             aliensDirection = 1;
             MoveDownAliens(4);
         }
 
-
         alien.Update(aliensDirection);
-
     } 
 }
 
@@ -157,7 +164,8 @@ void Game::MoveDownAliens(int distance)
     }
 }
 
-void Game::AliensFireLaser() {
+void Game::AliensFireLaser()
+{
 
     double currentTime = GetTime();
     if(currentTime - timeLastAlienFire >= alienLaserShootInterval)
@@ -167,5 +175,35 @@ void Game::AliensFireLaser() {
         alienLasers.push_back(Laser({alien.position.x + (alien.images[alien.type -1].width / 2), alien.position.y + alien.images[alien.type -1].height},4));
         timeLastAlienFire = GetTime();
     }
-
 }
+
+void Game::RespawnMysteryship()
+{
+    float currentTime = GetTime();
+    if(currentTime - lastTimeMysteryship >= 10 && mysteryship.state == false) {
+        mysteryship.Spawn();
+        lastTimeMysteryship = GetTime();
+    }
+}
+
+// void Game::MoveMysteryship()
+// {
+
+//     if(mysteryship.size() > 0)
+//     {
+//         if(myst)
+//         mysteryship[0].Update(2);
+//     }
+// }
+
+// void Game::DeleteInactiveMysteryship()
+// {
+//     for(auto it = mysteryship.begin(); it != mysteryship.end();) {
+//         if(!it -> state) {
+//             std::cout << "Sto eliminando mysteryshi " << std::endl;
+//             mysteryship.erase(it);
+//         } else {
+//             it++;
+//         }
+//     }
+// }

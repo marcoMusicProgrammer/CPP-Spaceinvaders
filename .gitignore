@@ -1,6 +1,11 @@
 # Ignore the compiled files
-./main
-# Ignore the build directory
-./main.dSYM
-# ignore .gitignore
-./.gitignore
+main
+
+# Ignore the build directory (macOS debugging)
+main.dSYM/
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore the lib directory (for macOS)
+lib/

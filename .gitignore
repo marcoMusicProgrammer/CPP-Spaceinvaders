@@ -1,0 +1,6 @@
+# Ignore the compiled files
+./main
+# Ignore the build directory
+./main.dSYM
+# ignore .gitignore
+./.gitignore

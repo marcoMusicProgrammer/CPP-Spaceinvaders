@@ -7,8 +7,8 @@
 int main() {
 
     Color grey = { 50, 50, 50, 255 };
-    int windowWidth = 750;
-    int windowHeight = 700;
+    int windowWidth = 800;
+    int windowHeight = 800;
 
     InitWindow(windowWidth,windowHeight,"Space Invaders on C++");
     SetTargetFPS(60);

@@ -15,11 +15,15 @@ Mysteryship::~Mysteryship()
 
 void Mysteryship::Draw()
 {   
-    DrawTextureV(image,position,WHITE);
+    if(state)
+    {
+        DrawTextureV(image,position,WHITE);
+    }
 }
 
 void Mysteryship::Spawn()
 {
+    
     position.y = 5;
     int randomDirection = GetRandomValue(0,1);
     int randomSpeed = GetRandomValue(4,8);
@@ -37,15 +41,38 @@ void Mysteryship::Spawn()
 
 void Mysteryship::Update()
 {
-    position.x += speed;
-
-    if(position.x < 0 || position.x > GetScreenWidth())
+    if(state)
     {
-        state = false;
+        position.x += speed;
+    
+        if(position.x < 0 || position.x > GetScreenWidth())
+        {
+            state = false;
+        }
     }
 }
 
 void Mysteryship::UnloadImage()
 {
     UnloadTexture(image);
+}
+
+Rectangle Mysteryship::GetRect()
+{
+    if(state)
+    {
+        return {
+            position.x,
+            position.y,
+            float(image.width),
+            float(image.height),
+        };
+    } else {
+        return {
+            position.x,
+            position.y,
+            0,
+            0
+        };
+    }
 }

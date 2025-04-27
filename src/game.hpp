@@ -33,7 +33,13 @@ class Game
 
         Mysteryship mysteryship;
         float lastTimeMysteryship;
-        void RespawnMysteryship();
-        // void MoveMysteryship();
-        // void DeleteInactiveMysteryship();
+        int mysteryShipSpawnInterval;
+
+        void CheckForCollisions();
+
+        void GameOver();
+        void Reset();
+        void InitGame();
+        int lives;
+        bool run;
 };

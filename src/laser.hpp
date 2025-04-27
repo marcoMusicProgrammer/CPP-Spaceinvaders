@@ -9,7 +9,7 @@ class Laser
 
     void Update();
     void Draw();
-
+    Rectangle GetRect();
 
     bool active;
     Rectangle rect;

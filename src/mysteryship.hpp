@@ -10,6 +10,7 @@ class Mysteryship {
         void Draw();
         void Spawn();
         void UnloadImage();
+        Rectangle GetRect();
 
         bool state;
         Texture2D image;

@@ -30,3 +30,13 @@ void Laser::Update()
         active = false;
     }
 }
+
+Rectangle Laser::GetRect()
+{
+    return {
+        position.x,
+        position.y,
+        4,
+        10
+    };
+}

@@ -14,7 +14,10 @@ class Game
         void HandleInput();
         void Draw();
         void DeleteInactiveLaser();
-       
+
+        bool run;
+        int lives;
+      
     private:
         Spaceship spaceship;
         std::vector <Obstacle> obstacles;
@@ -40,6 +43,4 @@ class Game
         void GameOver();
         void Reset();
         void InitGame();
-        int lives;
-        bool run;
 };

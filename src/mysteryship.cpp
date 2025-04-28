@@ -24,15 +24,15 @@ void Mysteryship::Draw()
 void Mysteryship::Spawn()
 {
     
-    position.y = 5;
+    position.y = 90;
     int randomDirection = GetRandomValue(0,1);
     int randomSpeed = GetRandomValue(4,8);
 
     if(randomDirection == 1) {
-        position.x = 0;
+        position.x = 25;
         speed = randomSpeed;
     } else {
-        position.x = GetScreenWidth() + 1;
+        position.x = GetScreenWidth() - 105;
         speed = -randomSpeed;
     }
 
@@ -45,7 +45,7 @@ void Mysteryship::Update()
     {
         position.x += speed;
     
-        if(position.x < 0 || position.x > GetScreenWidth())
+        if(position.x < 25 || position.x > GetScreenWidth() - 105)
         {
             state = false;
         }

@@ -17,6 +17,8 @@ class Game
 
         bool run;
         int lives;
+        int score;
+        int highscore;
       
     private:
         Spaceship spaceship;
@@ -29,6 +31,7 @@ class Game
         void MoveAliens();
         void MoveDownAliens(int distance);
         void AliensFireLaser();
+        void CheckForHighscore();
 
         constexpr static float alienLaserShootInterval{0.35};
         int aliensDirection;
@@ -43,4 +46,7 @@ class Game
         void GameOver();
         void Reset();
         void InitGame();
+
+        void SaveHighscoreToFile(int highscore);
+        int LoadHighscoreToFile();
 };

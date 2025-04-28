@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 Game::Game()
 {
@@ -201,6 +202,16 @@ void Game::CheckForCollisions() {
             {
                 it = aliens.erase(it);
                 laser.active = false;
+                if(it -> type == 1) {
+                    score += 10;
+                } else if (it -> type == 2) {
+                    score += 30;
+                } else {
+                    score += 50;
+                }
+
+                CheckForHighscore();
+
             } else {
                 ++it;
             }
@@ -227,6 +238,10 @@ void Game::CheckForCollisions() {
         {
             mysteryship.state = false;
             laser.active = false;
+
+            score += 100;
+
+            CheckForHighscore();
         }
     }
 
@@ -283,6 +298,39 @@ void Game::CheckForCollisions() {
     }
 }
 
+void Game::CheckForHighscore()
+{
+    if(score > highscore)
+    {
+        highscore = score;
+        SaveHighscoreToFile(highscore);
+    }
+}
+
+void Game::SaveHighscoreToFile(int highscore)
+{
+    std::ofstream highscoreFile("highscore.txt");
+    if(highscoreFile.is_open()) {
+        highscoreFile << highscore;
+        highscoreFile.close();
+    } else {
+        std::cerr << "Error occured opening highscore.txt file" << std::endl;
+    }
+}
+
+int Game::LoadHighscoreToFile() {
+    int loadedHighscore = 0;
+    std::ifstream highscoreFile("highscore.txt");
+    if(highscoreFile.is_open()) {
+        highscoreFile >> loadedHighscore;
+        highscoreFile.close();
+    } else {
+        std::cerr << "Error occured opening highscore.txt file" << std::endl;
+    }
+
+    return loadedHighscore;
+}
+
 void Game::GameOver()
 {
     std::cout << "Game Over" << std::endl;
@@ -295,7 +343,6 @@ void Game::Reset()
     aliens.clear();
     alienLasers.clear();
     obstacles.clear();
-    
 }
 
 void Game::InitGame()
@@ -307,6 +354,8 @@ void Game::InitGame()
     lastTimeMysteryship = 0.0;
     lives = 3;
     run = true;
+    score = 0;
+    highscore = LoadHighscoreToFile();
 
     mysteryShipSpawnInterval = GetRandomValue(10,20);
 }

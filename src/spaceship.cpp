@@ -44,7 +44,7 @@ void Spaceship::moveRight()
 
 void Spaceship::fireLaser()
 {
-    if (GetTime() - lastFireTime >= 0.15){
+    if (GetTime() - lastFireTime >= 0.5){
         lasers.push_back(Laser({position.x + (image.width/2),position.y},-10));
         lastFireTime = GetTime();
     }

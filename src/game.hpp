@@ -35,6 +35,7 @@ class Game
 
         constexpr static float alienLaserShootInterval{0.35};
         int aliensDirection;
+        float alienSpeed;
         float timeLastAlienFire;
 
         Mysteryship mysteryship;

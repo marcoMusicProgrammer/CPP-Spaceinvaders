@@ -157,12 +157,12 @@ void Game::MoveAliens()
 {
     for(auto& alien : aliens) {
         if(alien.position.x + alien.images[alien.type -1].width > GetScreenWidth() - 25) {
-            aliensDirection = -1;
+            aliensDirection = -alienSpeed;
             MoveDownAliens(4);
         }
 
         if(alien.position.x < 25) {
-            aliensDirection = 1;
+            aliensDirection = alienSpeed;
             MoveDownAliens(4);
         }
 
@@ -210,6 +210,20 @@ void Game::CheckForCollisions() {
                     score += 50;
                 }
 
+                if(aliens.size() < 2) {
+                    alienSpeed = 32;
+                } else if (aliens.size() < 4) {
+                    alienSpeed = 16;
+                } else if (aliens.size() < 8) {
+                    alienSpeed = 12;
+                } else if (aliens.size() < 16) {
+                    alienSpeed = 8;
+                } else if (aliens.size() < 30 ){
+                    alienSpeed = 4;
+                } else {
+                    alienSpeed = 1;
+                }
+                
                 CheckForHighscore();
 
             } else {
@@ -356,6 +370,7 @@ void Game::InitGame()
     run = true;
     score = 0;
     highscore = LoadHighscoreToFile();
+    alienSpeed = 1;
 
     mysteryShipSpawnInterval = GetRandomValue(10,20);
 }
